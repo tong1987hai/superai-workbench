@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_im"
+            android:icon="@drawable/ic_im"
+            android:title="IM通讯" />
+        <item
+            android:id="@+id/nav_live"
+            android:icon="@drawable/ic_live"
+            android:title="直播中心" />
+        <item
+            android:id="@+id/nav_pay"
+            android:icon="@drawable/ic_pay"
+            android:title="支付中心" />
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="数据看板" />
+        <item
+            android:id="@+id/nav_security"
+            android:icon="@drawable/ic_security"
+            android:title="安全中心" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="设置" />
+    </group>
+</menu>

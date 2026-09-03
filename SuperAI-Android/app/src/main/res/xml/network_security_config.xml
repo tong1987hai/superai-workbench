@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 生产环境：禁用明文传输，使用 certificate pinning -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.deepseek.com</domain>
+        <domain includeSubdomains="true">ark.cn-beijing.volces.com</domain>
+        <domain includeSubdomains="true">api.openai.com</domain>
+        <domain includeSubdomains="true">dashscope.aliyuncs.com</domain>
+        <domain includeSubdomains="true">api.moonshot.cn</domain>
+        <domain includeSubdomains="true">api.anthropic.com</domain>
+        <pin-set expiration="2025-12-31">
+            <!-- 示例 pinning（生产环境替换为实际证书哈希） -->
+            <pin digest="SHA-256">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</pin>
+        </pin-set>
+    </domain-config>
+    <!-- 调试时允许明文（仅debug build） -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="user" />
+            <certificates src="system" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

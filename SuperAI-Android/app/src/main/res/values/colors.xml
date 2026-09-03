@@ -1,0 +1,16 @@
+<resources>
+    <!-- 深色主题配色 -->
+    <color name="primary">#58a6ff</color>
+    <color name="primary_dark">#0d1117</color>
+    <color name="accent">#a371f7</color>
+    <color name="background">#0d1117</color>
+    <color name="surface">#161b22</color>
+    <color name="surface_variant">#21262d</color>
+    <color name="text_primary">#e6edf3</color>
+    <color name="text_secondary">#8b949e</color>
+    <color name="text_muted">#484f58</color>
+    <color name="border">#30363d</color>
+    <color name="success">#3fb950</color>
+    <color name="warning">#d29922</color>
+    <color name="error">#f85149</color>
+</resources>
