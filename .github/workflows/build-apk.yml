@@ -1,42 +1,38 @@
-名称：构建 Android APK: Build Android APK
-在：:
-  推送：:
-    分支：[ 主 ]: [ main ]
+name: Build Debug APK
 
-职位：:
-  构建：:
-    运行环境: ubuntu-latest: ubuntu-latest
-    步骤：:
-      - 名称：结账代码name: Checkout code
-        使用：actions/checkout@v4: actions/checkout@v4
-        使用：:
-          # git自动统一换行，替代dos2unix工具# git自动统一换行，替代dos2unix工具
-          core.autocrlf: 输入: input
+on:
+  push:
+    branches: [ main ]
 
-      - 名称：设置 JDK 17name: Set up JDK 17
-        使用：actions/setup-java@v5: actions/setup-java@v5
-        使用：:
-          java-version: '17': '17'
-          发行版：'temurin': 'temurin'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - 名称：设置 Android SDKname: Setup Android SDK
-        使用：android-actions/setup-android@v3: android-actions/setup-android@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-      - 名称：缓存 Gradlename: Cache Gradle
-        使用：actions/cache@v4: actions/cache@v4
-        使用：:
-          路径: |: |
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('SuperAI-Android/**/*.gradle*') }}: ${{ runner.os }}-gradle-${{ hashFiles('SuperAI-Android/**/*.gradle*') }}
-          恢复密钥：|: |
-            ${{ runner.os }}-gradle-
+          key: ${{ runner.os }}-gradle-${{ hashFiles('SuperAI-Android/**/*.gradle*') }}
 
-      - 名称：修复 gradlew 权限name: Fix gradlew permission
-        运行：chmod +x SuperAI-Android/gradlew: chmod +x SuperAI-Android/gradlew
+      - name: Fix gradlew permission
+        run: chmod +x SuperAI-Android/gradlew
 
-      -      - name: Build Debug APK
-        working-directory: ./SuperAI‑Android
+      - name: Build Debug APK
+        working-directory: ./SuperAI-Android
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload Artifact
@@ -44,4 +40,4 @@
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/*.apk
-          保留天数: 7: 7
+          retention-days: 7
