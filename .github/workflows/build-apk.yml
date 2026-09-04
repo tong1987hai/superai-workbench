@@ -1,6 +1,4 @@
-
 name: Build APK
-
 on:
   push:
     branches: [ main, master ]
@@ -11,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: SuperAI-Android
-
+        working-directory: ./SuperAI-Android
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +30,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build APK
+      - name: Build Debug APK
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
