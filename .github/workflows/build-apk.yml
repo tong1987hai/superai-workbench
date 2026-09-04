@@ -9,9 +9,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          # git自动统一换行，替代dos2unix工具
+          core.autocrlf: input
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
@@ -29,10 +32,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Fix gradlew line ending & permission
-        run: |
-          dos2unix SuperAI-Android/gradlew
-          chmod +x SuperAI-Android/gradlew
+      - name: Fix gradlew permission
+        run: chmod +x SuperAI-Android/gradlew
 
       - name: Build Debug APK
         working-directory: ./SuperAI-Android
